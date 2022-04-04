@@ -22,8 +22,8 @@ export default function handler(
 
   transport
     .sendMail({
-      from: "andris@kreata.ee",
-      to: "Andris Reinman <andris.reinman@gmail.com>, andris@ethereal.email",
+      from: "13zolw13@gmail.com",
+      to: "sesovi9004@royins.com",
       subject: "hello world",
       html: "<h1>Hello world!</h1>",
     })
