@@ -1,0 +1,17 @@
+
+nock('http://localhost:3000', {"encodedQueryParams":true})
+  .post('/api/email', {"email":""})
+  .reply(400, {"statusCode":400,"message":"Email is incorrect"}, [
+  'Content-Type',
+  'application/json; charset=utf-8',
+  'ETag',
+  '"31-ss7X+M56L5sL03jNPNaDu1CWoLk"',
+  'Content-Length',
+  '49',
+  'Vary',
+  'Accept-Encoding',
+  'Date',
+  'Mon, 04 Apr 2022 16:49:26 GMT',
+  'Connection',
+  'close'
+]);

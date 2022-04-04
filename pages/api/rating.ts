@@ -1,34 +1,31 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { IsEmail, IsNumberString, validate } from "class-validator";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { EmailAnswer, EmailForm, Rating } from "../../interfaces/email";
+import { EmailAnswer, EmailForm, } from "../../interfaces/email";
+import { IRating } from "../../interfaces/Rating";
 import nodemailer from "nodemailer";
 import nodemailerSendgrid from "nodemailer-sendgrid";
+import { validationQueryRationToNumber } from "./validationQueryRationToNumber";
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<EmailAnswer>
 ) {
 
-  interface Questioner {
-    QuestionaryName: string;
-    Rating: string;
-  }
-  // class Rating  {
-  //   @IsEmail()
-  //   email!: string;
 
-  //   listOfQuestioners!: Questioner[];
-  // }
-  interface Rating {
-    email: string;
-    listOfQuestioners: Questioner[];
+  class Rating implements IRating {
+    @IsEmail()
+    email!: string;
+
+    @IsNumberString()
+    rating!: string;
   }
 
-  let data = req.query as Rating;
+
+
   let ratingValidation = new Rating();
-  ratingValidation.email = body.email;
-  ratingValidation.listOfQuestioners = JSON.parse(body.listOfQuestioners);;
+  ratingValidation.email = req.body.email;
+  ratingValidation.rating = req.body.rating;
 
   function objToString(obj: any) {
     return Object.entries(obj).reduce((str, [p, val]) => {
@@ -36,17 +33,11 @@ export default function handler(
     }, "");
   }
 
-  function valitdationQueryRationToNumber(queryRating: string) {
-    let rating = parseInt(queryRating);;
-    if (rating > 5 || rating < 1) {
-      return false;
-    }
 
-  }
 
   validate(ratingValidation).then((errors) => {
     // errors is an array of validation errors
-    if (errors.length > 0 || !valitdationQueryRationToNumber(body.rating)) {
+    if (errors.length > 0 || !validationQueryRationToNumber(ratingValidation.rating)) {
       console.log("validation failed. errors: ", errors);
       console.log(errors[0].constraints);
       res.status(400).json({
