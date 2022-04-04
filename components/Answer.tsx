@@ -1,7 +1,7 @@
 interface AnswerProps {
-    text: string
+  text: string;
 }
 
 export function Answer(props: AnswerProps) {
-    return <p>{props.text}</p>
+  return <p className={"mt-5 bg-green-600"}>{props.text}</p>;
 }

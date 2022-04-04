@@ -1,9 +1,9 @@
-import { ChangeEvent} from "react";
+import { ChangeEvent } from "react";
 
 interface InputProps {
   value: string;
   name: string;
-  onChange(e: ChangeEvent<HTMLInputElement>): void
+  onChange(e: ChangeEvent<HTMLInputElement>): void;
 }
 
 export function Input(props: InputProps) {
@@ -12,8 +12,11 @@ export function Input(props: InputProps) {
       type="text"
       name={props.name}
       placeholder="Twój email..."
+      className={
+        "h-10 w-60 rounded-md mr-5 pl-2 bg-violet-700 text-white placeholder:text-white drop-shadow-md placeholder:opacity-75"
+      }
       value={props.value}
       onChange={(e) => props.onChange(e)}
     />
-  )
+  );
 }

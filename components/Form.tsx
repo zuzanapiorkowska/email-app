@@ -39,10 +39,14 @@ export function Form() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input name="email" value={values.email} onChange={handleChange} />
-      {errors.email ? <div>{errors.email}</div> : null}
-      <Button />
-      <Answer text={response} />
+      <div className={"flex flex-col justify-center text-center"}>
+        <div className={"flex flex-row justify-center mt-10"}>
+          <Input name="email" value={values.email} onChange={handleChange} />
+          <Button />
+        </div>
+        {errors.email ? <div>{errors.email}</div> : null}
+        <Answer text={response} />
+      </div>
     </form>
   );
 }
