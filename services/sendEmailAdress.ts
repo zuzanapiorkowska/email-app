@@ -12,7 +12,7 @@ export class sendEmailAdress {
       const response = await axios.post(url, { email: emailAdress });
       const ConfirmationAnswer: EmailAnswer = response.data;
       return ConfirmationAnswer;
-    } catch (err) {
+    } catch (err: any) {
       throw new Error(err.message + " Cannot connect to http://localhost:3000/api/email/");
     }
   }

@@ -23,7 +23,7 @@ function MainPage() {
         <Form />
       </div>
     </div>
-  );
+  )
 }
 
 export default MainPage;

@@ -1,4 +1,4 @@
-import { EmailAnswer, EmailForm } from "../interfaces/email";
+import { EmailAnswer } from "../interfaces/email";
 
 export class mockSendEmailAdress {
   async send(emailAdress: string): Promise<EmailAnswer> {
