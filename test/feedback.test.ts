@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 describe('Validating reviews', () => {
-    describe('Name of the group', () => {
+    describe('Test  with correct values', () => {
 
         it('should return values from form', async () => {
 
