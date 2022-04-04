@@ -23,30 +23,26 @@ export function Form() {
     validationSchema: SignupSchema,
     onSubmit: (values: { email: string }): void => {
       console.log("Oto email", values.email);
-      setEmail(values.email)
+      setEmail(values.email);
       new sendEmailAdress()
-      .send(values.email)
-      .then((res: EmailAnswer) => {
+        .send(values.email)
+        .then((res: EmailAnswer) => {
           console.log("Response message: ", res.message);
           setResponse("Ankieta wysłana. Sprawdż swojego maila! :)");
-      })
-      .catch((err)=> {
-        console.log("Oto jest error: ", err.message);
-        setResponse("Wystąpił błąd :( Spróbuj ponownie!");
-      })
-    }
+        })
+        .catch((err) => {
+          console.log("Oto jest error: ", err.message);
+          setResponse("Wystąpił błąd :( Spróbuj ponownie!");
+        });
+    },
   });
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input
-        name="email"
-        value={values.email}
-        onChange={handleChange}
-      />
+      <Input name="email" value={values.email} onChange={handleChange} />
       {errors.email ? <div>{errors.email}</div> : null}
       <Button />
-      <Answer text={response}/>
+      <Answer text={response} />
     </form>
   );
 }

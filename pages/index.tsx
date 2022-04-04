@@ -3,7 +3,7 @@ import { Form } from "../components/Form";
 function MainPage() {
   return (
     <div>
-      <h1>Witaj!</h1>
+      <h1 className={"text-3xl font-bold underline"}>Witaj!</h1>
       <p>
         Z racji na ukończenie przez Ciebie naszego planu stażowego, chcielibyśmy
         poprosić Cię o wypełnienie ankiety na jego temat :)
@@ -14,7 +14,7 @@ function MainPage() {
       <p>wpisz swój adres email</p>
       <Form />
     </div>
-  )
+  );
 }
 
 export default MainPage;
