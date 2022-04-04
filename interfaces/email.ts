@@ -11,3 +11,4 @@ export interface Rating {
   user: string;
   rating: string;
 }
+
