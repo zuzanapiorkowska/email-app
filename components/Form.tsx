@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { EmailAnswer, EmailForm } from "../interfaces/email";
 import { mockSendEmailAdress } from "../test/mockSendEmailAdress";
+import { sendEmailAdress } from "../services/sendEmailAdress";
 
 export function Form() {
   const [email, setEmail] = useState<string>("");
@@ -22,8 +23,8 @@ export function Form() {
     onSubmit: (values: { email: string }): void => {
       console.log("Oto email", values.email);
       setEmail(values.email)
-      new mockSendEmailAdress()
-      .send(values)
+      new sendEmailAdress()
+      .send(values.email)
       .then((res: EmailAnswer) => {
           console.log(res.message);
           setResponse(res.message);
