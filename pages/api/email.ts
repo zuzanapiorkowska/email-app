@@ -3,7 +3,7 @@ import { IsEmail, validate } from "class-validator";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { EmailAnswer, EmailForm } from "../../interfaces/email";
 import nodemailer from "nodemailer";
-// import sgTransport from "nodemailer-sendgrid-transport";
+import nodemailerSendgrid from "nodemailer-sendgrid";
 
 export default function handler(
   req: NextApiRequest,
@@ -14,29 +14,38 @@ export default function handler(
     email!: string;
   }
 
-  let transporter = nodemailer.createTransport({
-    service: "SendGrid",
-    auth: {
-      user: "",
-      pass: process.env.SENDGRID_KEY,
-    },
-  });
+  const transport = nodemailer.createTransport(
+    nodemailerSendgrid({
+      apiKey: String(process.env.SENDGRID_API_KEY),
+    })
+  );
 
-  const email = {
-    from: "awesome@bar.com",
-    to: "sesovi9004@royins.com",
-    subject: "Hello",
-    text: "Hello world",
-    html: "<b>Hello world</b>",
-  };
+  transport
+    .sendMail({
+      from: "andris@kreata.ee",
+      to: "Andris Reinman <andris.reinman@gmail.com>, andris@ethereal.email",
+      subject: "hello world",
+      html: "<h1>Hello world!</h1>",
+    })
+    .then(([res]) => {
+      console.log(
+        "Message delivered with code %s %s",
+        res.statusCode,
+        res.statusMessage
+      );
+    })
+    .catch((err) => {
+      console.log("Errors occurred, failed to deliver message");
 
-  transporter.sendMail(email, function (err, info) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Message sent: " + info.response);
-    }
-  });
+      if (err.response && err.response.body && err.response.body.errors) {
+        err.response.body.errors.forEach(
+          (error: { field: any; message: any }) =>
+            console.log("%s: %s", error.field, error.message)
+        );
+      } else {
+        console.log(err);
+      }
+    });
 
   const body: EmailForm = req.body;
   let emailValidation = new Email();
