@@ -6,6 +6,7 @@ import { useState } from "react";
 import { EmailAnswer, EmailForm } from "../interfaces/email";
 import { mockSendEmailAdress } from "../test/mockSendEmailAdress";
 import { sendEmailAdress } from "../services/sendEmailAdress";
+import { Answer } from "./Answer";
 
 export function Form() {
   const [email, setEmail] = useState<string>("");
@@ -26,7 +27,7 @@ export function Form() {
       new sendEmailAdress()
       .send(values.email)
       .then((res: EmailAnswer) => {
-          console.log(res.message);
+          console.log("Response message", res.message);
           setResponse(res.message);
       })
     },
@@ -34,14 +35,14 @@ export function Form() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      <Input
         name="email"
         value={values.email}
         onChange={handleChange}
-        onBlur={handleBlur}
       />
       {errors.email ? <div>{errors.email}</div> : null}
       <Button />
+      <Answer text={response}/>
     </form>
   );
 }
