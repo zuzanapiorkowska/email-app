@@ -21,5 +21,17 @@ describe('Testing email validation', () => {
 
     });
 
+
+    describe("Testing nodemialer valid email", () => {
+        it("should validate email ", async () => {
+
+            const response = await axios.post("http://localhost:3000/api/email", { email: 'valid@gmail.com' });
+            console.log(response.data);
+            expect(response.data.statusCode).toBe(200);
+
+        });
+
+
+    })
 });
 
