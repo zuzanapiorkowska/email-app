@@ -1,26 +1,46 @@
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
 import { Button } from "./Button";
 import { Input } from "./Input";
-import axios from "axios";
-import { EmailAnswer } from "../interfaces/email";
-import { sendEmailAdress } from "./services/sendEmailAdress";
+import { Formik, Field, useFormik } from "formik";
+import * as Yup from "yup";
+import { useState } from "react";
+import { EmailAnswer, EmailForm } from "../interfaces/email";
+import { mockSendEmailAdress } from "../test/mockSendEmailAdress";
 
-interface InputProps {
-    value: string;
-}
+export function Form() {
+  const [email, setEmail] = useState<string>("");
+  const [response, setResponse] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const SignupSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Niepoprawny adres e-mail")
+      .required("Wpisz swój e-mail!"),
+  });
 
-export function Form(props: InputProps) {
-    const [inputValue, setInputValue] = useState<string>("");
-    function handleChange(e: ChangeEvent<HTMLInputElement>) {
-      const value = e.target.value;
-      setInputValue(value);
-    }
+  const { values, handleChange, handleSubmit, handleBlur, errors } = useFormik({
+    initialValues: { email: "" },
+    validationSchema: SignupSchema,
+    onSubmit: (values: { email: string }): void => {
+      console.log("Oto email", values.email);
+      setEmail(values.email)
+      new mockSendEmailAdress()
+      .send(values)
+      .then((res: EmailAnswer) => {
+          console.log(res.message);
+          setResponse(res.message);
+      })
+    },
+  });
 
-    function handleOnClick() {
-       sendEmailAdress(inputValue);
-    }
-    return <div>
-        <Input value={inputValue} onChange={(e)=>handleChange(e)}/>
-        <Button onClick={()=>{handleOnClick()}}/>
-        </div>
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        name="email"
+        value={values.email}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+      {errors.email ? <div>{errors.email}</div> : null}
+      <Button />
+    </form>
+  );
 }

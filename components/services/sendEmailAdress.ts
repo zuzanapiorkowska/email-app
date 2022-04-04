@@ -1,7 +1,9 @@
 import { EmailAnswer } from "../../interfaces/email";
 import axios from "axios";
 
-export async function sendEmailAdress(
+
+export class sendEmailAdress {
+ async send(
     emailAdress: string
   ): Promise<EmailAnswer> {
     const url = "http://localhost:3000/email/";
@@ -10,7 +12,8 @@ export async function sendEmailAdress(
       const response = await axios.post(url, { email: emailAdress });
       const ConfirmationAnswer: EmailAnswer = response.data;
       return ConfirmationAnswer;
-    } catch {
-      throw new Error("Cannot connect to http://localhost:3000/email/");
+    } catch (err) {
+      throw new Error(err.message + " Cannot connect to http://localhost:3000/email/");
     }
   }
+}

@@ -1,9 +1,5 @@
-interface ButtonProps {
- onClick(): void;
-}
-
-export function Button(props: ButtonProps) {
+export function Button() {
   return (
-    <button onClick={()=>props.onClick()}>Wyślij</button>
+    <button type="submit">Wyślij</button>
   )
 }

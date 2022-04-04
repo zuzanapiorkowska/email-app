@@ -14,7 +14,6 @@ function MainPage() {
       </p>
       <p>wpisz swój adres email</p>
       <Form />
-      <button type="submit">wyślij</button>
     </div>
   )
 }
