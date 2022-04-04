@@ -1,40 +1,25 @@
-export {};
+
+import axios from "axios";
 import email from "../pages/api/email";
 
-describe("Testing nodemialer", () => {
-  it("should email validation validate email", () => {
-    const req = {
-      body: JSON.stringify({
-        discount: 0.2,
-        tax: 0.06,
-        items: [
-          {
-            id: 1,
-            price: 19.99,
-            quantity: 2,
-          },
-          {
-            id: 2,
-            price: 43.49,
-            quantity: 1,
-          },
-        ],
-      }),
-    };
 
-    const json = jest.fn();
+describe('Testing email validation', () => {
+    describe("Testing not valid email", () => {
+        it("should not validate email ", async () => {
+            // const body = { email: "13zolw13@gmail.com" }
 
-    const status = jest.fn(() => {
-      return {
-        json,
-      };
+            await axios.post("http://localhost:3000/api/email", { email: '' } ).then((response) => { fail('should not pass') }).catch((err) => { expect(err.response.status).toBe(400) })
+
+        })
+
+        it("should not validation wrong email email", async () => {
+
+
+            await axios.post("http://localhost:3000/api/email",  { email: 'dsadasda' } ).then((response) => { fail('should not pass') }).catch((err) => { expect(err.response.status).toBe(400) })
+
+        })
+
     });
 
-    const res = {
-      status,
-    };
-    // email(req, res);
-    expect(true).toBe(true);
-    expect(false).not.toBe(true);
-  });
 });
+
