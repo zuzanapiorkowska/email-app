@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { EmailAnswer } from "../interfaces/email";
 import { sendEmailAdress } from "../services/sendEmailAdress";
-import { Answer } from "./Answer";
+import { Answer } from "./Box";
 
 export function Form() {
   const [response, setResponse] = useState<string>("");
