@@ -11,21 +11,15 @@
   "dependencies": {
     "axios": "^0.26.1",
     "class-validator": "^0.13.2",
-<<<<<<< HEAD
     "formik": "^2.2.9",
-=======
     "maildev": "^2.0.1",
->>>>>>> b1aaec903000c55792d46c5ba375d88386f0fc79
     "next": "12.1.4",
     "nodemailer": "^6.7.3",
     "nodemailer-sendgrid": "^1.0.3",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-<<<<<<< HEAD
-    "yup": "^0.32.11"
-=======
+    "yup": "^0.32.11",
     "supertest": "^6.2.2"
->>>>>>> b1aaec903000c55792d46c5ba375d88386f0fc79
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
