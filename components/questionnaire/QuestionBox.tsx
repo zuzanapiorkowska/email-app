@@ -1,22 +1,11 @@
 import { useState } from "react";
-import { Answear } from "../../interfaces/Answear";
+import { QuestionProperties } from "../../interfaces/Question";
+import { QuestionWithAnswear } from "../../interfaces/QuestionWithAnswear";
 import { Question } from "./Question";
 
 export function QuestionBox() {
-  interface QuestionWithAnswear {
-    question: string;
-    answear: number;
-  }
 
-  interface Question {
-    question: string;
-    hint: string;
-    key: number;
-    selected: number;
-    answears: Answear[];
-  }
-
-  const [questions, setQuestions] = useState<Question[]>([
+  const [questions, setQuestions] = useState<QuestionProperties[]>([
     {
       question:
         "Jak podobał Ci się nasz staż? (ostatnia szansa na zmianę zdania! :D)",
