@@ -9,18 +9,26 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<EmailAnswer>
 ) {
-  class Rating {
-    @IsEmail()
-    email!: string | string[];
 
-    @IsNumberString()
-    rating!: string | string[];
+  interface Questioner {
+    QuestionaryName: string;
+    Rating: string;
+  }
+  // class Rating  {
+  //   @IsEmail()
+  //   email!: string;
+
+  //   listOfQuestioners!: Questioner[];
+  // }
+  interface Rating {
+    email: string;
+    listOfQuestioners: Questioner[];
   }
 
-  const body = req.query;
+  let data = req.query as Rating;
   let ratingValidation = new Rating();
-  ratingValidation.rating = body.rating;
   ratingValidation.email = body.email;
+  ratingValidation.listOfQuestioners = JSON.parse(body.listOfQuestioners);;
 
   function objToString(obj: any) {
     return Object.entries(obj).reduce((str, [p, val]) => {
@@ -28,9 +36,17 @@ export default function handler(
     }, "");
   }
 
+  function valitdationQueryRationToNumber(queryRating: string) {
+    let rating = parseInt(queryRating);;
+    if (rating > 5 || rating < 1) {
+      return false;
+    }
+
+  }
+
   validate(ratingValidation).then((errors) => {
     // errors is an array of validation errors
-    if (errors.length > 0) {
+    if (errors.length > 0 || !valitdationQueryRationToNumber(body.rating)) {
       console.log("validation failed. errors: ", errors);
       console.log(errors[0].constraints);
       res.status(400).json({
