@@ -1,5 +1,4 @@
 import { ChangeEvent} from "react";
-import { Notification } from "./Notification";
 
 interface InputProps {
   value: string;
