@@ -27,10 +27,14 @@ export function Form() {
       new sendEmailAdress()
       .send(values.email)
       .then((res: EmailAnswer) => {
-          console.log("Response message", res.message);
-          setResponse(res.message);
+          console.log("Response message: ", res.message);
+          setResponse("Ankieta wysłana. Sprawdż swojego maila! :)");
       })
-    },
+      .catch((err)=> {
+        console.log("Oto jest error: ", err.message);
+        setResponse("Wystąpił błąd :( Spróbuj ponownie!");
+      })
+    }
   });
 
   return (

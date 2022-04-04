@@ -1,5 +1,4 @@
 import { Form } from "../components/Form";
-import { Input } from "../components/Input";
 
 function MainPage() {
   return (
