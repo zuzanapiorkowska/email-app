@@ -39,7 +39,7 @@ describe('Testing email validation', () => {
     });
 
 
-    describe("Testing nodemialer valid email", () => {
+    describe("Testing nodemailer valid email", () => {
         it("should validate email ", async () => {
             nock.load(resolve(__dirname, "./__tapes__/", "ValidEmail.json"));
 
