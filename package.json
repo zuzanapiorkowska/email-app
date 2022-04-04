@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:maildev": "next dev | npx maildev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
