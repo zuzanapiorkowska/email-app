@@ -15,9 +15,18 @@ export default function handler(
   }
 
   const transport = nodemailer.createTransport(
-    nodemailerSendgrid({
-      apiKey: String(process.env.SENDGRID_API_KEY),
-    })
+    // nodemailerSendgrid({
+    //   apiKey: String(process.env.SENDGRID_API_KEY),
+    // })
+    {
+      host: "localhost",
+      port: 1025,
+      secure: false,
+      auth: {
+        user: "username",
+        pass: "password",
+      },
+    }
   );
 
   const body: EmailForm = req.body;
@@ -39,11 +48,16 @@ export default function handler(
           subject: "Newsletter",
           html: "<h1>Thank you!</h1>",
         })
-        .then(([response]) => {
+        .then((response) => {
           res.status(200).json({
-            statusCode: response.statusCode,
-            message: response.statusMessage,
+            statusCode: 200,
+            message: response.response,
           });
+          // .then(([response]) => {
+          // res.status(200).json({
+          //   statusCode: response.statusCode,
+          //   message: response.statusMessage,
+          // });
         })
         .catch((err) => {
           console.log("Errors occurred, failed to deliver message");
