@@ -1,4 +1,4 @@
-import { Form } from "../components/Form";
+import { Form } from "../components/homepage/Form";
 
 function MainPage() {
   return (

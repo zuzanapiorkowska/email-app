@@ -1,14 +1,13 @@
-import { Button } from "../components/Button";
+import { BigButton } from "../components/questionnaire/BigButton";
+import { QuestionBox } from "../components/questionnaire/QuestionBox";
 
-function Extendedk() {
-    return (
-      <Options />
-      <Options />
-      <
-      <Options />
-      <Button />
-    )
-  }
-  
-  export default Extended;
-  
+function Extended() {
+  return (
+    <div className="main-box">
+      <QuestionBox />
+      <BigButton />
+    </div>
+  );
+}
+
+export default Extended;
