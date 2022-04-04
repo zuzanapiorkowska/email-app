@@ -17,21 +17,6 @@ export default function handler(
     rating!: string | string[];
   }
 
-  const transport = nodemailer.createTransport(
-    // nodemailerSendgrid({
-    //   apiKey: String(process.env.SENDGRID_API_KEY),
-    // })
-    {
-      host: "localhost",
-      port: 1025,
-      secure: false,
-      auth: {
-        user: "username",
-        pass: "password",
-      },
-    }
-  );
-
   const body = req.query;
   let ratingValidation = new Rating();
   ratingValidation.rating = body.rating;
