@@ -31,6 +31,7 @@ export default function handler(
   );
 
   const body: EmailForm = req.body;
+ 
   let emailValidation = new Email();
   emailValidation.email = body.email;
 
