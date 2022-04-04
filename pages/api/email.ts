@@ -4,6 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { EmailAnswer, EmailForm } from "../../interfaces/email";
 import nodemailer from "nodemailer";
 import nodemailerSendgrid from "nodemailer-sendgrid";
+import { htmlOutput } from "../../email";
 
 export default function handler(
   req: NextApiRequest,
@@ -46,7 +47,7 @@ export default function handler(
           // to: "sesovi9004@royins.com",
           to: emailValidation.email,
           subject: "Newsletter",
-          html: "<h1>Thank you!</h1>",
+          html: htmlOutput.html,
         })
         .then((response) => {
           res.status(200).json({
