@@ -1,4 +1,4 @@
-import { Answear } from "./Answear";
+import { Answer } from "./Answer";
 
 export interface QuestionProperties {
     question: string;

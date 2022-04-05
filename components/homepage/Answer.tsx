@@ -1,7 +1,7 @@
-interface AnswearProps {
+interface AnswerProps {
   text: string;
 }
 
-export function Answear(props: AnswearProps) {
+export function Answer(props: AnswerProps) {
   return <p className={"validation mt-5 bg-green-600"}>{props.text}</p>;
 }

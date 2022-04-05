@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Answear } from "../../interfaces/Answear";
+import { Answer } from "../../interfaces/Answer";
 import { Option } from "./Option";
 
 interface QuestionProps {

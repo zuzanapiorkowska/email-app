@@ -1,10 +1,10 @@
 import axios from "axios";
 import { EmailAnswer } from "../interfaces/email";
-import { QuestionWithAnswear } from "../interfaces/QuestionWithAnswear";
+import { QuestionWithAnswer } from "../interfaces/QuestionWithAnswear";
 
 export class sendQuestionsAndAnswears {
     async send(
-       questionsWithAnswears: QuestionWithAnswear[]
+       questionsWithAnswears: QuestionWithAnswer[]
      ): Promise<EmailAnswer> {
        const url = "http://localhost:3000/api/email/";
        try {

@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { QuestionProperties } from "../../interfaces/Question";
-import { QuestionWithAnswear } from "../../interfaces/QuestionWithAnswear";
+import { QuestionWithAnswer } from "../../interfaces/QuestionWithAnswear";
 import { BigButton } from "./BigButton";
 import { Question } from "./Question";
 
 export function QuestionBox() {
-  const answears = [1, 2, 3, 4, 5];
+  const answers = [1, 2, 3, 4, 5];
   //warunki walidacji danych
   //muszą być odpowiedzi dla każdego pytania
-  //mus
+  //musimy mieć email tego, kto tam wszedł
+
 
   const [questions, setQuestions] = useState<QuestionProperties[]>([
     {
@@ -32,16 +33,16 @@ export function QuestionBox() {
     },
   ]);
   const [response, setResponse] = useState<string>("")
-  const [questionsWithAnswears, setQuestionsWithAnswers] = useState<
-    QuestionWithAnswear[]
+  const [questionsWithAnswers, setQuestionsWithAnswers] = useState<
+    QuestionWithAnswer[]
   >([]);
 
-  function updateQA(question: string, answear: number) {
+  function updateQA(question: string, answer: number) {
     setQuestionsWithAnswers((prevState) =>
       prevState.filter((q) => q.question !== question)
     );
     setQuestionsWithAnswers((prevState) =>
-      prevState.concat({ question: question, answear: answear })
+      prevState.concat({ question: question, answear: answer })
     );
 
     setQuestions((prevState) => {
@@ -51,11 +52,11 @@ export function QuestionBox() {
           question: q.question,
           hint: q.hint,
           key: q.key,
-          selected: answear,
+          selected: answer,
         };
       });
     });
-    console.log(questionsWithAnswears);
+    console.log(questionsWithAnswers);
   }
 
   function handleClick():void {
@@ -85,7 +86,7 @@ export function QuestionBox() {
             text={q.question}
             hint={q.hint}
             key={q.key}
-            answears={answears}
+            answears={answers}
             selected={q.selected}
           />
         );

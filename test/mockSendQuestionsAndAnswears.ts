@@ -1,10 +1,10 @@
 import axios from "axios";
 import { EmailAnswer } from "../interfaces/email";
-import { QuestionWithAnswear } from "../interfaces/QuestionWithAnswear";
+import { QuestionWithAnswer } from "../interfaces/QuestionWithAnswear";
 
 export class mockSendQuestionsAndAnswears {
     send(
-       questionsWithAnswears: QuestionWithAnswear[]
+       questionsWithAnswears: QuestionWithAnswer[]
      ): EmailAnswer {
 
        const response = {

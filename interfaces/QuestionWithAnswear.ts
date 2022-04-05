@@ -1,12 +1,12 @@
 import { Email } from "./email";
 
-export interface QuestionWithAnswear {
+export interface QuestionWithAnswer {
     question: string;
     answear: number;
   }
 
-  export interface QuestionsWithAnswears {
+  export interface QuestionsWithAnswers {
     questionsWithAnswears
-    : QuestionWithAnswear[];
+    : QuestionWithAnswer[];
     email: Email;
   }
