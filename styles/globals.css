@@ -8,7 +8,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    background-color: lightgrey;
+    background-color: rgb(248, 248, 248);
 }
 
 * {
@@ -16,7 +16,8 @@ body {
 }
 
 .question .option-button {
-  padding: 0.3rem;
+  padding: 0.2rem;
+  padding-bottom: 0.4rem;
   margin: 0.5rem 1rem;
   background-color: rgb(145, 170, 224);
   color: white;
@@ -29,7 +30,8 @@ body {
 
 
 .selected {
-  padding: 0.3rem;
+  padding: 0.2rem;
+  padding-bottom: 0.4rem;
   margin: 0.5rem 1rem;
   color: white;
   font-size: 2rem;
@@ -37,7 +39,8 @@ body {
   width: 6rem;
   height: 3.5rem;
   border-radius: 0.4rem;
-  background-color: rgb(255, 251, 0);
+  background-color: rgb(145, 170, 224);
+  border: 4px solid rgb(240, 59, 99);
 }
 
 .option-button:hover {
@@ -93,6 +96,72 @@ margin-bottom: 1rem;
   font-weight: bold;
 }
 
-.confirm-button:hover {
+button:hover {
   background-color: rgb(211, 36, 66);
+}
+
+.content-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input {
+ background-color: rgb(118, 146, 206);
+ margin: 0.5rem 1rem 1rem;
+}
+
+.title {
+font-size: 2rem;
+margin-top: 1rem;
+color: rgb(23, 56, 128);
+}
+
+.description {
+  color: rgb(31, 31, 31);
+  padding: 0.3rem 2rem;
+  font-size: 1.2rem;
+}
+
+.description-mini {
+  color: rgb(31, 31, 31);
+  padding: 0.3rem 2rem;
+  font-size: 0.9rem;
+}
+
+.main-box {
+  width: 50rem;
+  height: 28rem;
+  background-color: rgb(223, 223, 223);
+}
+
+.label {
+  margin: 0;
+  padding: 0;
+  margin-top: 0.5rem;
+  text-align: center;
+  color: blue;
+  font-size: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 1.5rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 0.4rem;
+}
+
+.validation {
+  transform: translateY(3rem);
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  background-color: rgb(62, 189, 62);
+}
+
+input:hover {
+  background-color: rgb(87, 87, 255);
 }

@@ -5,7 +5,7 @@ import { Option } from "./Option";
 interface QuestionProps {
   text: string;
   hint: string;
-  answears: Answear[];
+  answears: number[];
   selected: number;
   onClick(answear: number): void;
 }
@@ -19,12 +19,12 @@ export function Question(props: QuestionProps) {
         {props.answears.map((a) => {
           return (
             <Option
-              className={props.selected === a.rating? "selected" : "option-button"}
+              className={props.selected === a? "selected" : "option-button"}
               onClick={() => {
-                props.onClick(a.rating);
+                props.onClick(a);
               }}
-              answear={a.rating}
-              key={a.key}
+              answear={a}
+              key={a}
             />
           );
         })}

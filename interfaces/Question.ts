@@ -5,5 +5,4 @@ export interface QuestionProperties {
     hint: string;
     key: number;
     selected: number;
-    answears: Answear[];
   }

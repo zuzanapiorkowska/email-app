@@ -34,15 +34,14 @@ export function Form() {
   });
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className={"flex flex-col justify-center text-center"}>
-        <div className={"flex flex-row justify-center mt-10"}>
-          <Input name="email" value={values.email} onChange={handleChange} />
-          <Button />
-        </div>
-        {errors.email ? <div>{errors.email}</div> : null}
-        <Answer text={response} />
-      </div>
-    </form>
+      <form onSubmit={handleSubmit}>
+          <div className={"flex flex-row justify-center mt-10 form"}>
+            <p className="label">wpisz swój adres email:</p>
+            <Input name="email" value={values.email} onChange={handleChange} />
+            <Button />
+          </div>
+          {errors.email ? <div>{errors.email}</div> : null}
+          <Answer text={response} />
+      </form>
   );
 }

@@ -2,23 +2,22 @@ import { Form } from "../components/homepage/Form";
 
 function MainPage() {
   return (
-    <div className={"min-h-screen w-screen"}>
+    <div className={"min-h-screen w-screen content-box"}>
       <div
         className={
-          "bg-slate-200 mx-auto h-64 max-w-5xl rounded-md drop-shadow-lg"
+          "main-box mx-auto h-64 max-w-5xl rounded-md drop-shadow-lg"
         }
       >
-        <h1 className={"text-4xl font-bold text-center mb-5"}>Witaj!</h1>
+        <h1 className={"text-4xl font-bold text-center mb-5 title"}>Witaj!</h1>
         <div className={"text-center"}>
-          <p>
+          <p className={"description"}>
             Z racji na ukończenie przez Ciebie naszego planu stażowego,
             chcielibyśmy poprosić Cię o wypełnienie ankiety na jego temat :)
           </p>
-          <p>
+          <p className="description-mini">
             Jeśli masz parę wolnych minut i chcesz pomóc nam w staniu się
-            jeszcze lepszymi, wypełnij naszą absurdalnie krótką ankietę!
+            jeszcze lepszymi, <br/>wypełnij naszą absurdalnie krótką ankietę!
           </p>
-          <p>wpisz swój adres email</p>
         </div>
         <Form />
       </div>

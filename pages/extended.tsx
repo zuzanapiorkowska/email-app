@@ -5,7 +5,6 @@ function Extended() {
   return (
     <div className="main-box">
       <QuestionBox />
-      <BigButton />
     </div>
   );
 }
