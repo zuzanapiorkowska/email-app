@@ -159,9 +159,18 @@ color: rgb(23, 56, 128);
   transform: translateY(3rem);
   padding: 0.5rem;
   border-radius: 0.4rem;
-  background-color: rgb(62, 189, 62);
+  background-color: rgba(1, 1, 1, 0);
+  color: rgb(42, 163, 42);
 }
 
 input:hover {
   background-color: rgb(87, 87, 255);
+}
+
+.main-box-big {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
