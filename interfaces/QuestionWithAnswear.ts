@@ -2,7 +2,7 @@ import { Email, EmailAnswer } from "./email";
 
 export interface QuestionWithAnswer {
   questionId: number;
-  answer: number;
+  answer: string;
 }
 
 export interface QuestionsWithAnswers {
@@ -30,3 +30,4 @@ interface Question {
   question: string;
   id: number;
 }
+
