@@ -17,23 +17,23 @@ export function QuestionBox() {
     },
     {
       question: "Jak dobrze był Twoim zdaniem przygotowany prowadzący?",
-      hint: "(1 - fatalnie, 2 - kiepsko, 3 - średnio, 4 - był ok, 5 - świetnie",
+      hint: "(1 - fatalnie, 2 - kiepsko, 3 - średnio, 4 - był ok, 5 - świetnie)",
       key: Math.random(),
       selected: 0,
     },
     {
       question: "Czy uważasz, że zdobyta wiedza przyda Ci się w życiu?",
-      hint: "(1 - w ogóle mi się nie przyda, 2 - raczej nie, 3 - może, 4 - myślę, że tak, 5 - na pewno!",
+      hint: "(1 - w ogóle mi się nie przyda, 2 - raczej nie, 3 - może, 4 - myślę, że tak, 5 - na pewno!)",
       key: Math.random(),
       selected: 0,
     },
   ]);
-
+  const [response, setResponse] = useState<string>("")
   const [questionsWithAnswears, setQuestionsWithAnswers] = useState<
     QuestionWithAnswear[]
   >([]);
 
-  function handleClick(question: string, answear: number) {
+  function updateQA(question: string, answear: number) {
     setQuestionsWithAnswers((prevState) =>
       prevState.filter((q) => q.question !== question)
     );
@@ -54,12 +54,31 @@ export function QuestionBox() {
     });
     console.log(questionsWithAnswears);
   }
+
+  function handleClick():void {
+    
+    // new sendQuestionsAndAnswears()
+    // .send(questionsWithAnswears)
+    //     .then((res: EmailAnswear) => {
+    //       console.log("Response message: ", res.message);
+    //       setResponse("Twoje odpowiedzi zostały wysłane. Dziękujemy!");
+    //     })
+    //     .catch((err) => {
+    //       console.log("Oto jest error: ", err.message);
+    //       setResponse("Wystąpił błąd :( Spróbuj ponownie!");
+    //     });
+    // console.log("clicked");
+    // const data = new mockSendQuestionsAndAnswears().send(questionsWithAnswears);
+    // console.log(data.message);
+    // setResponse(data.message);
+  }
+
   return (
     <div className="question-box">
       {questions.map((q) => {
         return (
           <Question
-            onClick={(answear) => handleClick(q.question, answear)}
+            onClick={(answear) => updateQA(q.question, answear)}
             text={q.question}
             hint={q.hint}
             key={q.key}
@@ -68,13 +87,8 @@ export function QuestionBox() {
           />
         );
       })}
-      <BigButton />
+      <BigButton onClick={()=>handleClick()} />
+      <p className={"validation mt-5 bg-green-600"}>{response}</p>
     </div>
   );
 }
-
-//funkcja onSubmit
-//mockowanie przychodzenia danych
-//zmiana nazwy funkcji co zmienia guziczki
-//przepięcie linku na templatce
-//wysłanie odpowiedzi na serwer

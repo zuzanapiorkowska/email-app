@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { EmailAnswer } from "../../interfaces/email";
 import { sendEmailAdress } from "../../services/sendEmailAdress";
-import { Answer } from "./Answer";
+import { Answear } from "./Answer";
 
 export function Form() {
   const [response, setResponse] = useState<string>("");
@@ -41,7 +41,7 @@ export function Form() {
             <Button />
           </div>
           {errors.email ? <div>{errors.email}</div> : null}
-          <Answer text={response} />
+          <Answear text={response} />
       </form>
   );
 }
