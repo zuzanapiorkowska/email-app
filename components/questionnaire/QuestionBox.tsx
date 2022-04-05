@@ -42,7 +42,7 @@ export function QuestionBox() {
       prevState.filter((q) => q.question !== question)
     );
     setQuestionsWithAnswers((prevState) =>
-      prevState.concat({ question: question, answear: answer })
+      prevState.concat({ question: question, answer: answer })
     );
 
     setQuestions((prevState) => {
