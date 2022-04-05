@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:maildev": "next dev | npx maildev",
+    "maildev": "npx maildev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

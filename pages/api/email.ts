@@ -1,19 +1,35 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { IsEmail, validate } from "class-validator";
+import { IsEmail, validate, ValidationError } from "class-validator";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { EmailAnswer, EmailForm } from "../../interfaces/email";
 import nodemailer from "nodemailer";
 import nodemailerSendgrid from "nodemailer-sendgrid";
 import { htmlOutput } from "../../email";
+import Joi from "joi";
+import { envConfig } from "../../config/envConfig";
+import { exit } from "process";
+import { objToString } from "../../utils/objToString";
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<EmailAnswer>
 ) {
-  class Email {
+  class EmailValidation {
     @IsEmail()
     email!: string;
   }
+
+  // enum EmailProvider {
+
+  // }
+
+  // class Email {
+  //   email: string;
+  //   constructor(email: string){
+  //     this.email = email;
+  //   }
+
+  //   createTransport(provider: string)
+  // }
 
   const transport = nodemailer.createTransport(
     // nodemailerSendgrid({
@@ -31,48 +47,35 @@ export default function handler(
   );
 
   const body: EmailForm = req.body;
- 
-  let emailValidation = new Email();
+
+  let emailValidation = new EmailValidation();
   emailValidation.email = body.email;
 
-  validate(emailValidation).then((errors) => {
+  validate(emailValidation).then(async (errors) => {
     // errors is an array of validation errors
     if (errors.length > 0) {
       console.log("validation failed. errors: ", errors);
-      res.status(400).json({ statusCode: 400, message: "Email is incorrect" });
+      res
+        .status(400)
+        .json({ statusCode: 400, message: objToString(errors[0].constraints) });
     } else {
       console.log("validation succeed");
-      transport
-        .sendMail({
-          from: "13zolw13@gmail.com",
-          // to: "sesovi9004@royins.com",
+      try {
+        const response = await transport.sendMail({
+          from: envConfig.senderEmail,
           to: emailValidation.email,
           subject: "Newsletter",
           html: htmlOutput.html,
-        })
-        .then((response) => {
-          res.status(200).json({
-            statusCode: 200,
-            message: response.response,
-          });
-          // .then(([response]) => {
-          // res.status(200).json({
-          //   statusCode: response.statusCode,
-          //   message: response.statusMessage,
-          // });
-        })
-        .catch((err) => {
-          console.log("Errors occurred, failed to deliver message");
-          if (err.response && err.response.body && err.response.body.errors) {
-            err.response.body.errors.forEach(
-              (error: { field: any; message: any }) =>
-                console.log("%s: %s", error.field, error.message)
-            );
-            res.status(500).json({ statusCode: 500, message: err });
-          } else {
-            console.log(err);
-          }
         });
+
+        res.status(200).json({
+          statusCode: 200,
+          message: response.response,
+        });
+      } catch (error) {
+        console.log("Errors occurred, failed to deliver message", error);
+        res.status(500).json({ statusCode: 500, message: objToString(error) });
+      }
     }
   });
 }
