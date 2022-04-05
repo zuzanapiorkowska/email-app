@@ -1,98 +1,66 @@
 import { useState } from "react";
-import { QuestionProperties } from "../../interfaces/Question";
-import { QuestionWithAnswer } from "../../interfaces/QuestionWithAnswear";
+import {
+  AnsweredQuestion,
+  QuestionWithOptionToDisplay,
+} from "../../interfaces/Survey";
 import { BigButton } from "./BigButton";
 import { Question } from "./Question";
 
 export function QuestionBox() {
-  const answers = [1, 2, 3, 4, 5];
-  //warunki walidacji danych
-  //muszą być odpowiedzi dla każdego pytania
-  //musimy mieć email tego, kto tam wszedł
-
-
-  const [questions, setQuestions] = useState<QuestionProperties[]>([
+  const [questionsWithOptions, setQuestionsWithOptions] = useState<
+    QuestionWithOptionToDisplay[]
+  >([
     {
-      question:
-        "Jak podobał Ci się nasz staż? (ostatnia szansa na zmianę zdania! :D)",
-      hint: "(1 - w ogóle, 2 - niezbyt, 3 - średnio, 4 - był ok, 5 - bardzo)",
-      key: Math.random(),
-      selected: 0,
-    },
-    {
-      question: "Jak dobrze był Twoim zdaniem przygotowany prowadzący?",
-      hint: "(1 - fatalnie, 2 - kiepsko, 3 - średnio, 4 - był ok, 5 - świetnie)",
-      key: Math.random(),
-      selected: 0,
-    },
-    {
-      question: "Czy uważasz, że zdobyta wiedza przyda Ci się w życiu?",
-      hint: "(1 - w ogóle mi się nie przyda, 2 - raczej nie, 3 - może, 4 - myślę, że tak, 5 - na pewno!)",
-      key: Math.random(),
-      selected: 0,
+      survey: { id: "1abc", question: "ok?", options: ["1", "2", "pies"] },
+      selected: "pies",
     },
   ]);
-  const [response, setResponse] = useState<string>("")
-  const [questionsWithAnswers, setQuestionsWithAnswers] = useState<
-    QuestionWithAnswer[]
+  const [response, setResponse] = useState<string>("");
+  const [answeredQuestions, setAnsweredQuestions] = useState<
+    AnsweredQuestion[]
   >([]);
 
-  function updateQA(question: string, answer: number) {
-    setQuestionsWithAnswers((prevState) =>
-      prevState.filter((q) => q.question !== question)
+  function updateSurvey(answeredQuestion: string, answer: string) {
+    setAnsweredQuestions((prevState) =>
+      prevState.filter((question) => question.questionId !== answeredQuestion)
     );
-    setQuestionsWithAnswers((prevState) =>
-      prevState.concat({ question: question, answer: answer })
+    setAnsweredQuestions((prevState) =>
+      prevState.concat({ questionId: answeredQuestion, answer: answer })
     );
 
-    setQuestions((prevState) => {
-      return prevState.map((q) => {
-        if (q.question !== question) return q;
+    setQuestionsWithOptions((prevState) => {
+      return prevState.map((question) => {
+        if (answeredQuestion !== question.survey.id) return question;
         return {
-          question: q.question,
-          hint: q.hint,
-          key: q.key,
+          survey: {
+            id: question.survey.id,
+            question: question.survey.question,
+            options: question.survey.options,
+          },
           selected: answer,
         };
       });
     });
-    console.log(questionsWithAnswers);
+    console.log(answeredQuestions);
   }
 
-  function handleClick():void {
-    
-    // new sendQuestionsAndAnswears()
-    // .send(questionsWithAnswears)
-    //     .then((res: EmailAnswear) => {
-    //       console.log("Response message: ", res.message);
-    //       setResponse("Twoje odpowiedzi zostały wysłane. Dziękujemy!");
-    //     })
-    //     .catch((err) => {
-    //       console.log("Oto jest error: ", err.message);
-    //       setResponse("Wystąpił błąd :( Spróbuj ponownie!");
-    //     });
-    // console.log("clicked");
-    // const data = new mockSendQuestionsAndAnswears().send(questionsWithAnswears);
-    // console.log(data.message);
-    // setResponse(data.message);
-  }
+  function handleClick(): void {}
 
   return (
     <div className="question-box">
-      {questions.map((q) => {
+      {questionsWithOptions.map((surveyStep) => {
         return (
           <Question
-            onClick={(answear) => updateQA(q.question, answear)}
-            text={q.question}
-            hint={q.hint}
-            key={q.key}
-            answears={answers}
-            selected={q.selected}
+            onClick={(answear) => updateSurvey(surveyStep.survey.id, answear)}
+            text={surveyStep.survey.question}
+            key={surveyStep.survey.id}
+            options={surveyStep.survey.options}
+            selected={surveyStep.selected}
           />
         );
       })}
-      <BigButton onClick={()=>handleClick()} />
-      <p className={"validation mt-5 bg-green-600"}>{response}</p>
+      <BigButton onClick={() => handleClick()} />
+      <p className="validation mt-5 bg-green-600">{response}</p>
     </div>
   );
 }

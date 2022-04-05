@@ -1,30 +1,26 @@
-import { useEffect, useState } from "react";
-import { Answer } from "../../interfaces/Answer";
 import { Option } from "./Option";
 
 interface QuestionProps {
   text: string;
-  hint: string;
-  answears: number[];
-  selected: number;
-  onClick(answear: number): void;
+  options: string[];
+  selected: string;
+  onClick(answear: string): void;
 }
 
 export function Question(props: QuestionProps) {
   return (
     <div className="question">
       <p>{props.text}</p>
-      <p className="hint">{props.hint}</p>
       <div className="options">
-        {props.answears.map((a) => {
+        {props.options.map((option) => {
           return (
             <Option
-              className={props.selected === a? "selected" : "option-button"}
+              className={props.selected === option? "selected" : "option-button"}
               onClick={() => {
-                props.onClick(a);
+                props.onClick(option);
               }}
-              answear={a}
-              key={a}
+              option={option}
+              key={option}
             />
           );
         })}

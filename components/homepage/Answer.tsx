@@ -3,5 +3,5 @@ interface AnswerProps {
 }
 
 export function Answer(props: AnswerProps) {
-  return <p className={"validation mt-5 bg-green-600"}>{props.text}</p>;
+  return <p className="validation mt-5 bg-green-600">{props.text}</p>;
 }

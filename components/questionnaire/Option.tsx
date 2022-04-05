@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 interface OptionProps {
-  answear: number;
+  option: string;
   className: string;
   onClick(): void;
 }
@@ -14,7 +14,7 @@ export function Option(props: OptionProps) {
         props.onClick();
       }}
     >
-      {props.answear}
+      {props.option}
     </button>
   );
 }

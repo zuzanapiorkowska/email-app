@@ -1,11 +1,11 @@
 import axios from "axios";
-import { EmailAnswer } from "../interfaces/email";
-import { QuestionWithAnswer } from "../interfaces/QuestionWithAnswear";
+
+import { AnsweredQuestion, Confirmation } from "../interfaces/Survey";
 
 export class mockSendQuestionsAndAnswears {
     send(
-       questionsWithAnswears: QuestionWithAnswer[]
-     ): EmailAnswer {
+       questionsWithAnswears: AnsweredQuestion[]
+     ): Confirmation {
 
        const response = {
            statusCode: 200,

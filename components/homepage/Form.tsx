@@ -3,9 +3,9 @@ import { Input } from "./Input";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-import { EmailAnswer } from "../../interfaces/email";
 import { sendEmailAdress } from "../../services/sendEmailAdress";
 import { Answer } from "./Answer";
+import { Confirmation } from "../../interfaces/Survey";
 
 export function Form() {
   const [response, setResponse] = useState<string>("");
@@ -22,7 +22,7 @@ export function Form() {
       console.log("Oto email", values.email);
       new sendEmailAdress()
         .send(values.email)
-        .then((res: EmailAnswer) => {
+        .then((res: Confirmation) => {
           console.log("Response message: ", res.message);
           setResponse("Ankieta wysłana. Sprawdż swojego maila! :)");
         })
@@ -35,7 +35,7 @@ export function Form() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className={"flex flex-row justify-center mt-10 form"}>
+      <div className="flex flex-row justify-center mt-10 form">
         <p className="label">wpisz swój adres email:</p>
         <Input name="email" value={values.email} onChange={handleChange} />
         <Button />

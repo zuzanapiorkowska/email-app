@@ -1,14 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { IsEmail, validate } from "class-validator";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { EmailAnswer, Email } from "../../interfaces/email";
 import nodemailer from "nodemailer";
 import nodemailerSendgrid from "nodemailer-sendgrid";
 import { htmlOutput } from "../../email";
+import { Confirmation } from "../../interfaces/Survey";
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<EmailAnswer>
+  res: NextApiResponse<Confirmation>
 ) {
   class Email {
     @IsEmail()
