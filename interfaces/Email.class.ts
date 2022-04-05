@@ -16,7 +16,6 @@ export class Email {
     subject: string;
     html: string;
   };
-  res!: NextApiResponse<EmailAnswer>;
 
   setEmailAddress(email: string) {
     this.email = email;
@@ -64,24 +63,19 @@ export class Email {
     return this;
   }
 
-  setRes(res: NextApiResponse<EmailAnswer>) {
-    this.res = res;
-    return this;
-  }
-
-  async sendEmailMessage() {
+  async sendEmailMessage(): Promise<EmailAnswer> {
     try {
       const response = await this.transport.sendMail(this.emailDetails);
-      return this.res.status(200).json({
+      return {
         statusCode: 200,
         message: response.response,
-      });
+      };
     } catch (error) {
       console.log("Errors occurred, failed to deliver message", error);
-      return this.res.status(500).json({
+      return {
         statusCode: 500,
         message: objToString(error),
-      });
+      };
     }
   }
 }

@@ -26,12 +26,12 @@ export default async function handler(
         .status(400)
         .json({ statusCode: 400, message: objToString(errors[0].constraints) });
     } else {
-      await new Email()
+      const { statusCode, message } = await new Email()
         .createTransport(envConfig.emailProvider)
         .setEmailAddress(emailValidation.email)
         .createEmailMessage("Newsletter", htmlOutput.html)
-        .setRes(res)
         .sendEmailMessage();
+      res.status(statusCode).json({ statusCode, message });
     }
   });
 }
