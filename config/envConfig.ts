@@ -13,4 +13,5 @@ export const envConfig = {
   apiUrl: getEnvironmentVariable("API_URL"),
   senderGridApiKey: getEnvironmentVariable("SENDGRID_API_KEY"),
   senderEmail: getEnvironmentVariable("SENDER_EMAIL"),
+  emailProvider: getEnvironmentVariable("EMAIL_PROVIDER"),
 };
