@@ -13,7 +13,7 @@ export interface QuestionsWithAnswers {
 
 interface Api {
   submit(questionsWithAnswears: QuestionsWithAnswers): Promise<EmailAnswer>;
-  getQuestionnaire(id: string): Promise<IQuestionnaire>;
+  getQuestionnaire(id: number): Promise<IQuestionnaire>;
 }
 
 interface IQuestionnaire {
