@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { IsEmail, validate } from "class-validator";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { EmailAnswer, EmailForm } from "../../interfaces/email";
+import { EmailAnswer, Email } from "../../interfaces/email";
 import nodemailer from "nodemailer";
 import nodemailerSendgrid from "nodemailer-sendgrid";
 import { htmlOutput } from "../../email";
@@ -30,7 +30,7 @@ export default function handler(
     }
   );
 
-  const body: EmailForm = req.body;
+  const body: Email = req.body;
  
   let emailValidation = new Email();
   emailValidation.email = body.email;

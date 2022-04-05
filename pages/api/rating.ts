@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { IsEmail, IsNumberString, validate } from "class-validator";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { EmailAnswer, EmailForm, } from "../../interfaces/email";
+import { EmailAnswer, Email, } from "../../interfaces/email";
 import { IRating } from "../../interfaces/Rating";
 import nodemailer from "nodemailer";
 import nodemailerSendgrid from "nodemailer-sendgrid";

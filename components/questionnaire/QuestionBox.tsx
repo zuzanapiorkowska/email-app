@@ -8,6 +8,7 @@ export function QuestionBox() {
   const answears = [1, 2, 3, 4, 5];
   //warunki walidacji danych
   //muszą być odpowiedzi dla każdego pytania
+  //mus
 
   const [questions, setQuestions] = useState<QuestionProperties[]>([
     {
