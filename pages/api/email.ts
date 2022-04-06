@@ -1,8 +1,6 @@
 import { Email } from "./../../interfaces/Email.class";
-import { IsEmail, validate } from "class-validator";
+import { contains, IsEmail, validate } from "class-validator";
 import type { NextApiRequest, NextApiResponse } from "next";
-import nodemailer from "nodemailer";
-import nodemailerSendgrid from "nodemailer-sendgrid";
 import { envConfig } from "../../config/envConfig";
 import { objToString } from "../../utils/objToString";
 import { htmlOutput } from "../../email";

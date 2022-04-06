@@ -1,32 +1,5 @@
-import { INSPECT_MAX_BYTES } from "buffer";
-import {
-  IsEmail,
-  Min,
-  Max,
-  IsInt,
-  IsString,
-  validate,
-  ValidateNested,
-} from "class-validator";
-
-class Answer {
-  @IsString()
-  answer!: string[];
-
-  @IsInt()
-  @Min(1)
-  @Max(5)
-  choice!: number;
-}
-
-class Request {
-  @IsString()
-  @IsEmail()
-  email!: string;
-
-  @ValidateNested({ each: true })
-  answers!: Answer[];
-}
+import { validate } from "class-validator";
+import { Answer, Request } from "../dto/Request.dto";
 
 function generateRequest(overrides: { email?: any; answers?: any }) {
   const request = new Request();
