@@ -38,3 +38,9 @@ export default async function handler(
     }
   });
 }
+
+// interface Endpoints {
+//   registerForSurvey(data: { email: string }): Promise<{}>;
+//   submitSurvey(data: { email: string; answer: Answer }): Promise<{}>;
+//   submitBigSurvey(data: { email: string; answers: Answer[] }): Promise<{}>;
+// }

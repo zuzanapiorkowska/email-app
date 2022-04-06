@@ -1,10 +1,12 @@
+import { Type } from "class-transformer";
 import {
   IsString,
   IsInt,
   Min,
   Max,
-  IsEmail,
+  IsEmail, 
   ValidateNested,
+  IsArray,
 } from "class-validator";
 
 export class Answer {
@@ -23,5 +25,7 @@ export class Request {
   email!: string;
 
   @ValidateNested({ each: true })
+  @Type(() => Answer)
+  @IsArray()
   answers!: Answer[];
 }
