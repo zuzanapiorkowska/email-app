@@ -23,7 +23,7 @@
        <mj-button css-class="hover" href="localhost:3000/extended?email=me&rating=2"> 1 </mj-button>
       </mj-column>
       <mj-column> 
-        <mj-button  href="localhost:3000/exntended?email=me&rating=2"> 2 </mj-button>
+        <mj-button  href="localhost:3000/extended?email=me&rating=2"> 2 </mj-button>
       </mj-column>
       <mj-column>
         <mj-button  href="localhost:3000/extended?email=me&rating=3"> 3 </mj-button>

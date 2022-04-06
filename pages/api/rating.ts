@@ -23,7 +23,7 @@ export default function handler(
 
 
 
-  let ratingValidation = new Rating();
+  const ratingValidation = new Rating();
   ratingValidation.email = req.body.email;
   ratingValidation.rating = req.body.rating;
 
