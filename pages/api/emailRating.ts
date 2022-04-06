@@ -4,7 +4,6 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { IRating } from "../../interfaces/Rating";
 import nodemailer from "nodemailer";
 import nodemailerSendgrid from "nodemailer-sendgrid";
-import { validationQueryRationToNumber } from "./validationQueryRationToNumber";
 import { Confirmation } from "../../interfaces/Survey";
 import { objToString } from "../../utils/objToString";
 import { Answer, Request } from "../../dto/Request.dto";
