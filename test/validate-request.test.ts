@@ -13,7 +13,7 @@ function generateRequest(overrides: { email?: any; answers?: any }) {
 describe("validate request", () => {
   test("passes with correct request", async () => {
     const request = generateRequest({});
-    expect(await validate(request)).toEqual([]);
+    expect(await validate(request)).toMatchSnapshot;
   });
 
   test("fails without email", async () => {
@@ -30,11 +30,15 @@ describe("validate request", () => {
     const request = generateRequest({ answers: null });
     expect(await validate(request)).toEqual([
       expect.objectContaining({
-        constraints: {
-          isEmail: "email must be an email",
-          isString: "email must be a string",
-        },
-        property: "email",
+        children: [
+          expect.objectContaining({
+            constraints: {
+              nestedValidation:
+                "each value in nested property answers must be either object or array",
+            },
+            property: "answers",
+          }),
+        ],
       }),
     ]);
   });
