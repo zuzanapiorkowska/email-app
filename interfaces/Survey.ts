@@ -5,7 +5,7 @@ export interface Confirmation {
 
 export interface FirstQuestionAnswer {
   user: string;
-  rating: string;
+  rating: number;
 }
 
 export interface Survey {
@@ -15,7 +15,7 @@ export interface Survey {
 
 export interface AnsweredQuestion {
   questionId: string;
-  answer: string;
+  answer: number;
 }
 
 export interface CompletedSurvey {
@@ -32,7 +32,7 @@ export interface Api {
 export interface QuestionWithOptions {
   id: string;
   question: string;
-  options: string[];
+  options: number[];
 }
 
 export interface QuestionWithOptionToDisplay{
