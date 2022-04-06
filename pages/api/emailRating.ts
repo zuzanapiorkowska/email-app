@@ -7,40 +7,43 @@ import nodemailerSendgrid from "nodemailer-sendgrid";
 import { validationQueryRationToNumber } from "./validationQueryRationToNumber";
 import { Confirmation } from "../../interfaces/Survey";
 import { objToString } from "../../utils/objToString";
+import { Answer, Request } from "../../dto/Request.dto";
+import url from "url";
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Confirmation>
 ) {
-  class Rating implements IRating {
-    @IsEmail()
-    email!: string;
+  const answerObjectFromQuery: Answer[] = [
+    {
+      answer: req.query.questionId[0],
+      choice: Number(req.query.rating[0]),
+    },
+  ];
 
-    @IsNumberString()
-    rating!: string;
-  }
-
-  const ratingValidation = new Rating();
-  ratingValidation.email = req.body.email;
-  ratingValidation.rating = req.body.rating;
+  const ratingValidation = new Request();
+  ratingValidation.email = decodeURIComponent(String(req.query.email));
+  console.log(answerObjectFromQuery);
+  ratingValidation.answers = answerObjectFromQuery;
 
   validate(ratingValidation).then((errors) => {
     // errors is an array of validation errors
-    if (
-      errors.length > 0 ||
-      !validationQueryRationToNumber(ratingValidation.rating)
-    ) {
+    if (errors.length > 0) {
       console.log("validation failed. errors: ", errors);
-      console.log(errors[0].constraints);
       res.status(400).json({
         statusCode: 400,
         message: objToString(errors[0].constraints),
       });
     } else {
       console.log("validation succeed");
-      res
-        .status(200)
-        .json({ statusCode: 200, message: "Thank you for your feedback!" });
+      res.redirect(
+        303,
+        url.format({
+          protocol: "http",
+          pathname: "/extended",
+          query: {},
+        })
+      );
     }
   });
 }

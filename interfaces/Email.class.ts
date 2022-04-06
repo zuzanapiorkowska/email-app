@@ -1,7 +1,7 @@
 import nodemailerSendgrid from "nodemailer-sendgrid";
 import nodemailer from "nodemailer";
 import { envConfig } from "../config/envConfig";
-import { htmlOutput } from "../email";
+import { htmlEmail } from "../email";
 import { objToString } from "../utils/objToString";
 import EmailProviders from "./EmailProviders";
 import { NextApiResponse } from "next";
