@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   presets: ["next/babel"], 
-  disable: "swcMinify"
+  swcMinify: false 
 }
 
 module.exports = nextConfig

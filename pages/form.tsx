@@ -2,21 +2,22 @@
 //jak się definiuje pola, które są arrayami?
 //z walidacji mamy react hook form class validator github
 
-import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function App() {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
-
-  console.log(watch("example"));
-
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const onSubmit = (data: any) => console.log(data);
+  console.log(errors);
+  
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input defaultValue="test" {...register("example")} />
-      <input {...register("exampleRequired", { required: true })} />
-      {errors.exampleRequired && <span>This field is required</span>}
-      
+
+      <input {...register} type="radio" value="1" />
+      <input {...register} type="radio" value="2" />
+      <input {...register} type="radio" value="3" />
+      <input {...register} type="radio" value="4" />
+      <input {...register} type="radio" value="5" />
+
       <input type="submit" />
     </form>
   );
