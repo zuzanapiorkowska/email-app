@@ -65,3 +65,86 @@ Array [
   },
 ]
 `;
+
+exports[`validate request fails with incorrect answer 1`] = `
+Array [
+  ValidationError {
+    "children": Array [
+      ValidationError {
+        "children": Array [
+          ValidationError {
+            "children": Array [],
+            "constraints": Object {
+              "isString": "answer must be a string",
+            },
+            "property": "answer",
+            "target": Answer {},
+            "value": undefined,
+          },
+          ValidationError {
+            "children": Array [],
+            "constraints": Object {
+              "isInt": "choice must be an integer number",
+              "max": "choice must not be greater than 5",
+              "min": "choice must not be less than 1",
+            },
+            "property": "choice",
+            "target": Answer {},
+            "value": undefined,
+          },
+        ],
+        "property": "0",
+        "target": Array [
+          Answer {},
+        ],
+        "value": Answer {},
+      },
+    ],
+    "property": "answers",
+    "target": Request {
+      "answers": Array [
+        Answer {},
+      ],
+      "email": "mihau@gmail.com",
+    },
+    "value": Array [
+      Answer {},
+    ],
+  },
+]
+`;
+
+exports[`validate request fails with incorrect email 1`] = `
+Array [
+  ValidationError {
+    "children": Array [],
+    "constraints": Object {
+      "isEmail": "email must be an email",
+    },
+    "property": "email",
+    "target": Request {
+      "answers": Array [],
+      "email": "mihaugmail.com",
+    },
+    "value": "mihaugmail.com",
+  },
+]
+`;
+
+exports[`validate request fails without email 1`] = `
+Array [
+  ValidationError {
+    "children": Array [],
+    "constraints": Object {
+      "isEmail": "email must be an email",
+      "isString": "email must be a string",
+    },
+    "property": "email",
+    "target": Request {
+      "answers": Array [],
+      "email": null,
+    },
+    "value": null,
+  },
+]
+`;
