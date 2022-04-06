@@ -10,14 +10,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Confirmation>
 ) {
-  const data = req.body;
-
-  const BigResponse = plainToClass(Request, data);
-  BigResponse.answers = data.answers;
-  BigResponse.email = data.email;
 
   try {
-    const surveyObject = await transformAndValidate(Request, data);
+    const surveyObject = await transformAndValidate(Request, req.body);
     console.log(surveyObject);
     res
       .status(201)
