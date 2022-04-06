@@ -5,9 +5,6 @@ import {
   Max,
   IsEmail,
   ValidateNested,
-  IsBooleanString,
-  IsBoolean,
-  IsOptional,
 } from "class-validator";
 
 export class Answer {

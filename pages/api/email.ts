@@ -1,5 +1,5 @@
 import { Email } from "./../../interfaces/Email.class";
-import { contains, IsEmail, validate } from "class-validator";
+import { IsEmail, validate } from "class-validator";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "../../config/envConfig";
 import { objToString } from "../../utils/objToString";
