@@ -1,71 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fails with empty answers 1`] = `
-Array [
-  ValidationError {
-    "children": Array [],
-    "constraints": Object {
-      "isString": "each value in answers must be a string",
-    },
-    "property": "answers",
-    "target": Request {
-      "answers": null,
-      "email": "mihau@gmail.com",
-    },
-    "value": null,
-  },
-]
-`;
-
-exports[`fails with incorrect email 1`] = `
-Array [
-  ValidationError {
-    "children": Array [],
-    "constraints": Object {
-      "isEmail": "email must be an email",
-    },
-    "property": "email",
-    "target": Request {
-      "email": "mihaugmail.com",
-    },
-    "value": "mihaugmail.com",
-  },
-]
-`;
-
-exports[`fails with incorrect email 2`] = `
-Array [
-  ValidationError {
-    "children": Array [],
-    "constraints": Object {
-      "isEmail": "email must be an email",
-    },
-    "property": "email",
-    "target": Request {
-      "email": "mihaugmail.com",
-    },
-    "value": "mihaugmail.com",
-  },
-]
-`;
-
-exports[`fails without email 1`] = `
-Array [
-  ValidationError {
-    "children": Array [],
-    "constraints": Object {
-      "isEmail": "email must be an email",
-      "isString": "email must be a string",
-    },
-    "property": "email",
-    "target": Request {
-      "email": null,
-    },
-    "value": null,
-  },
-]
-`;
-
 exports[`validate request fails with incorrect answer 1`] = `
 Array [
   ValidationError {
@@ -76,6 +10,7 @@ Array [
             "children": Array [],
             "constraints": Object {
               "isString": "answer must be a string",
+              "minLength": "answer must be longer than or equal to 1 characters",
             },
             "property": "answer",
             "target": Answer {},
@@ -128,6 +63,18 @@ Array [
     },
     "value": "mihaugmail.com",
   },
+  ValidationError {
+    "children": Array [],
+    "constraints": Object {
+      "arrayNotEmpty": "answers should not be empty",
+    },
+    "property": "answers",
+    "target": Request {
+      "answers": Array [],
+      "email": "mihaugmail.com",
+    },
+    "value": Array [],
+  },
 ]
 `;
 
@@ -145,6 +92,18 @@ Array [
       "email": null,
     },
     "value": null,
+  },
+  ValidationError {
+    "children": Array [],
+    "constraints": Object {
+      "arrayNotEmpty": "answers should not be empty",
+    },
+    "property": "answers",
+    "target": Request {
+      "answers": Array [],
+      "email": null,
+    },
+    "value": Array [],
   },
 ]
 `;

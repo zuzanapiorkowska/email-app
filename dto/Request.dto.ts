@@ -8,10 +8,13 @@ import {
   IsEmail,
   ValidateNested,
   IsArray,
+  MinLength,
+  ArrayNotEmpty,
 } from "class-validator";
 
 export class Answer {
   @IsString()
+  @MinLength(1)
   answer!: string;
 
   @IsInt()
@@ -28,5 +31,6 @@ export class Request {
   @ValidateNested({ each: true })
   @Type(() => Answer)
   @IsArray()
+  @ArrayNotEmpty()
   answers!: Answer[];
 }
