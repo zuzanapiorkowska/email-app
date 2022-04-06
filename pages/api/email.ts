@@ -21,7 +21,7 @@ export default async function handler(
   let emailValidation = new EmailValidation();
   emailValidation.email = body.email;
 
-  validate(emailValidation).then(async (errors) => {
+  await validate(emailValidation).then(async (errors) => {
     if (errors.length > 0) {
       res
         .status(400)
@@ -34,7 +34,8 @@ export default async function handler(
         .setEmailAddress(emailValidation.email)
         .createEmailMessage("Newsletter", htmlOutput.html)
         .sendEmailMessage();
-      res.status(statusCode).json({ statusCode, message });
+      console.log(statusCode, message);
+      res.status(statusCode).send({ statusCode, message });
     }
   });
 }

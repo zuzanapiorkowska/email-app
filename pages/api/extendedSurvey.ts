@@ -1,7 +1,6 @@
 import { plainToClass } from "class-transformer";
 import { transformAndValidate } from "class-transformer-validator";
 import { NextApiRequest, NextApiResponse } from "next";
-import { ValidationError } from "yup";
 import { Request } from "../../dto/Request.dto";
 import { Confirmation } from "../../interfaces/Survey";
 import { objToString } from "../../utils/objToString";
