@@ -5,7 +5,7 @@ import { htmlOutput } from "../email";
 import { objToString } from "../utils/objToString";
 import EmailProviders from "./EmailProviders";
 import { NextApiResponse } from "next";
-import { EmailAnswer } from "./email";
+import { Confirmation } from "./Survey";
 
 export class Email {
   email!: string;
@@ -63,7 +63,7 @@ export class Email {
     return this;
   }
 
-  async sendEmailMessage(): Promise<EmailAnswer> {
+  async sendEmailMessage(): Promise<Confirmation> {
     try {
       const response = await this.transport.sendMail(this.emailDetails);
       return {

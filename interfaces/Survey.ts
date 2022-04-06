@@ -8,7 +8,6 @@ export interface FirstQuestionAnswer {
   rating: string;
 }
 
-
 export interface Survey {
   id: string;
   questionsWithOptions: QuestionWithOptions[];

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { sendEmailAdress } from "../../services/sendEmailAdress";
 import { Answer } from "./Answer";
 import { Confirmation } from "../../interfaces/Survey";
+import { SendRequest } from "../../services/sendRequest";
 
 export function Form() {
   const [response, setResponse] = useState<string>("");
@@ -20,8 +21,8 @@ export function Form() {
     validationSchema: SignupSchema,
     onSubmit: (values: { email: string }): void => {
       console.log("Oto email", values.email);
-      new sendEmailAdress()
-        .send(values.email)
+      new SendRequest()
+        .sendEmail(values.email)
         .then((res: Confirmation) => {
           console.log("Response message: ", res.message);
           setResponse("Ankieta wysłana. Sprawdż swojego maila! :)");
