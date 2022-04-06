@@ -1,0 +1,8 @@
+# Ignore artifacts:
+build
+coverage
+.gitignore
+.eslintrc.json
+.prettierc.json
+*.config.ts
+*.json
