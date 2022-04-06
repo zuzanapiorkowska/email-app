@@ -5,11 +5,14 @@ import {
   Max,
   IsEmail,
   ValidateNested,
+  IsBooleanString,
+  IsBoolean,
+  IsOptional,
 } from "class-validator";
 
 export class Answer {
   @IsString()
-  answer!: string[];
+  answer!: string;
 
   @IsInt()
   @Min(1)

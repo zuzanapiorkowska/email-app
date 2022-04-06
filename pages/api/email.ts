@@ -3,8 +3,9 @@ import { contains, IsEmail, validate } from "class-validator";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "../../config/envConfig";
 import { objToString } from "../../utils/objToString";
-import { htmlOutput } from "../../email";
 import { Confirmation } from "../../interfaces/Survey";
+import mjml2html from "mjml";
+import { htmlEmail } from "../../email";
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,6 +27,8 @@ export default async function handler(
         .status(400)
         .json({ statusCode: 400, message: objToString(errors[0].constraints) });
     } else {
+      const html = htmlEmail(encodeURIComponent(emailValidation.email));
+      const htmlOutput = mjml2html(html);
       const { statusCode, message } = await new Email()
         .createTransport(envConfig.emailProvider)
         .setEmailAddress(emailValidation.email)
