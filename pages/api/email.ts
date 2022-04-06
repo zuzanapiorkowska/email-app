@@ -3,7 +3,6 @@ import { IsEmail, validate } from "class-validator";
 import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 import nodemailerSendgrid from "nodemailer-sendgrid";
-import { EmailAnswer, EmailForm } from "../../interfaces/email";
 import { envConfig } from "../../config/envConfig";
 import { objToString } from "../../utils/objToString";
 import { htmlOutput } from "../../email";
@@ -18,7 +17,7 @@ export default async function handler(
     email!: string;
   }
 
-  const body: EmailForm = req.body;
+  const body = req.body;
 
   let emailValidation = new EmailValidation();
   emailValidation.email = body.email;
