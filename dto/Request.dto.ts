@@ -1,10 +1,11 @@
+import "reflect-metadata";
 import { Type } from "class-transformer";
 import {
   IsString,
   IsInt,
   Min,
   Max,
-  IsEmail, 
+  IsEmail,
   ValidateNested,
   IsArray,
 } from "class-validator";
