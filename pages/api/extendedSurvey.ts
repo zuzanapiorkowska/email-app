@@ -1,34 +1,32 @@
 import { plainToClass } from "class-transformer";
 import { transformAndValidate } from "class-transformer-validator";
-import { validate } from "class-validator";
 import { NextApiRequest, NextApiResponse } from "next";
-import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event";
+import { ValidationError } from "yup";
 import { Request } from "../../dto/Request.dto";
+import { Confirmation } from "../../interfaces/Survey";
 import { objToString } from "../../utils/objToString";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<Confirmation>
 ) {
   const data = req.body;
 
   const BigResponse = plainToClass(Request, data);
-  // const BigResponse = new Request();
   BigResponse.answers = data.answers;
   BigResponse.email = data.email;
-  console.log(BigResponse);
 
   try {
-    // transform and validate request body - array of User objects
-    const userObjects = await transformAndValidate(Request, data);
-    console.log(userObjects);
-    console.log("validation succeed", BigResponse);
-    res.status(201).send({ message: BigResponse });
-  } catch (err) {
+    const surveyObject = await transformAndValidate(Request, data);
+    console.log(surveyObject);
+    res
+      .status(201)
+      .send({ statusCode: 201, message: "survey saved successfully" });
+  } catch (err: any) {
     console.log(err);
     res.status(400).json({
       statusCode: 400,
-      message: objToString(err),
+      message: objToString(err[0].constraints),
     });
   }
 }
