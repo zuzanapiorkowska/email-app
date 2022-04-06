@@ -11,7 +11,7 @@ export default function handler(
 ) {
   const answerObjectFromQuery: Answer[] = [
     {
-      answer: req.query.questionId[0],
+      answer: req.query.questionId[0], 
       choice: Number(req.query.rating[0]),
     },
   ];
