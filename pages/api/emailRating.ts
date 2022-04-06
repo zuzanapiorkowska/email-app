@@ -4,22 +4,21 @@ import { Confirmation } from "../../interfaces/Survey";
 import { objToString } from "../../utils/objToString";
 import { Answer, Request } from "../../dto/Request.dto";
 import url from "url";
+import { plainToClass } from "class-transformer";
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Confirmation>
 ) {
-  const answerObjectFromQuery: Answer[] = [
-    {
-      answer: req.query.questionId[0],
-      choice: Number(req.query.rating[0]),
-    },
-  ];
-
-  const ratingValidation = new Request();
-  ratingValidation.email = decodeURIComponent(String(req.query.email));
-  console.log(answerObjectFromQuery);
-  ratingValidation.answers = answerObjectFromQuery;
+  const ratingValidation = plainToClass(Request, {
+    email: decodeURIComponent(String(req.query.email)),
+    answers: [
+      {
+        answer: String(req.query.questionId),
+        choice: Number(req.query.rating),
+      },
+    ],
+  });
 
   validate(ratingValidation).then((errors) => {
     // errors is an array of validation errors
@@ -36,7 +35,12 @@ export default function handler(
         url.format({
           protocol: "http",
           pathname: "/extended",
-          query: {},
+          query: {
+            email: ratingValidation.email,
+            answer: ratingValidation.answers[0].answer,
+            choice: ratingValidation.answers[0].choice,
+            surveyId: "qwertyuiop",
+          },
         })
       );
     }
